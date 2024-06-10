@@ -7,7 +7,6 @@ jobs:
   ci:
     runs-on: ubuntu-20.04
     env:
-    
       DB_HOST: 127.0.0.1
       DB_PORT: 3306
       DB_USER: root
@@ -35,7 +34,7 @@ jobs:
         run: |
           sudo systemctl start mysql
           mysql -e "use mysql; FLUSH PRIVILEGES; ALTER USER '${{ env.DB_USER }}'@'localhost' IDENTIFIED BY '${{ env.DB_PASSWORD }}';" -uroot -proot
-          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+          mysql -e 'CREATE DATABASE ${{ env.DB_NAME }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
       - name: Install Poetry
         run: |
