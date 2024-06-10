@@ -1,14 +1,8 @@
 ## portfoilo-site
-- 개인 포트폴리오 사이트 만들어서 서버 배포까지 목표
+- 필라테스 관리자 서비스
 ### poetry
 - poetry shell
 - poetry install
-
-### django-setting
-- django-admin startproject config . # 현재 폴더에서 프로젝트 생성
-- python manage.py startapp users
-- python manage.py startapp portfoilo
-- python manage.py startapp common
 
 ### 모델 구조
 회원(Member)
