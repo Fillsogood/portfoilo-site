@@ -13,6 +13,7 @@ jobs:
       DB_USER: root
       DB_PASSWORD: 1234
       DB_DATABASE: oz_django
+      SECRET_KEY: xcvrvzxzxjbbkktniwfqa
     steps:
       - name: Check out the codes
         uses: actions/checkout@v2
