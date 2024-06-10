@@ -40,9 +40,7 @@ DJANGO_SYSTEM_APPS = [
     "django.contrib.staticfiles",
 ]
 CUSTOM_USER_APPS = [
-    "users",
     "common",
-    "portfolios",
 ]
 
 THIRD_PARTY_APPS = [
@@ -53,8 +51,6 @@ THIRD_PARTY_APPS = [
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS + THIRD_PARTY_APPS
 
-# 유저 관련 설정
-AUTH_USER_MODEL = "users.User"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

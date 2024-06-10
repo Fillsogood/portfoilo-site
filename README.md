@@ -1,71 +1,53 @@
 ## portfoilo-site
 - 개인 포트폴리오 사이트 만들어서 서버 배포까지 목표
-### venv-setting
-- python3 -m venv .venv
-- source .venv/bin/activate
+### poetry
+- poetry shell
+- poetry install
 
 ### django-setting
-- pip install django
 - django-admin startproject config . # 현재 폴더에서 프로젝트 생성
 - python manage.py startapp users
 - python manage.py startapp portfoilo
 - python manage.py startapp common
 
-### mysql 연동
-- pip install mysqlclient
-- db.py 만들어서 프라이빗하게 하고 settings.py에 설정
-- 모델 정의 후
-- python manage.py inspectdb 
-
 ### 모델 구조
-1. User
+회원(Member)
 
-- email: str unique 
-- Nicname: str
-- password: str
+- 회원ID (PK)
+- 이름
+- 이메일
+- 연락처
+- 주소
+- 등록일
+- 강사(Instructor)
 
-2. portfolio
-- title: str
-- description: str
-- image: image
-- link: str
-- user_id: int FK
+강사ID (PK)
 
-3. common
-- create_at
-- update_at
+- 이름
+- 이메일
+- 연락처
+- 주소
+- 등록일
+- 수업(Class)
 
-### Rest API
+수업ID (PK)
+- 수업명
+- 수업 설명
+- 수업 시간
+- 강사ID (FK: 강사)
+- 회원 수업 예약(Reservation)
 
-(1) User API
+예약ID (PK)
+- 회원ID (FK: 회원)
+- 수업ID (FK: 수업)
+- 예약 날짜
+- 예약 시간
+- 예약 상태 (예약 완료, 취소 등)
+- 결제(Payment)
 
-login
-api/v1/login
-- POST: 로그인
-
-logout
-api/v1/logout
-- POST: 로그아웃
-
-signup
-api/v1/signup
-- POST: 회원가입
-
-UserDetaiview
-- GET: 특정 유저 조회
-
-MyInfo
-- GET: 자신 정보 조회
-- PUT: 자신 정보 수정
-
-(2) Portfoilo_post API
-
-PortfolioList
-api/v1/feeds
-- POST: 새로운 포트폴리오 생성
-- GET: 전체 목록 조회
-
-PortfolioDetail
-- GET: 특정 포폴 상세 조회
-- PUT: 특정 포폴 정보 수정
-- DELETE: 특정 포폴 삭제
+결제ID (PK)
+- 예약ID (FK: 회원 수업 예약)
+- 결제 금액
+- 결제 일자
+- 결제 수단
+- 결제 상태 (결제 완료, 취소 등)
