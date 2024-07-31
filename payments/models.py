@@ -1,22 +1,17 @@
+# payments/models.py
 from django.db import models
 
-from common.models import CommonModel
-from reservations.models import Reservation
+from users.models import User
 
 
-class Payment(CommonModel):
-    STATUS_CHOICES = [
-        ("Paid", "Paid"),
-        ("Cancelled", "Cancelled"),
-    ]
-
-    PAYMENT_METHOD_CHOICES = [
-        ("CreditCard", "Credit Card"),
-        ("BankTransfer", "Bank Transfer"),
-        ("PayPal", "PayPal"),
-    ]
-
-    reservation = models.OneToOneField(Reservation, on_delete=models.CASCADE, related_name="payment")
+class Payment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="payments")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Paid")
+    payment_date = models.DateTimeField(auto_now_add=True)
+    payment_method = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return f"{self.user.user_id} - {self.amount}"
+
+    class Meta:
+        db_table = "payment"

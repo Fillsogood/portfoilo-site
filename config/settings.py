@@ -42,10 +42,9 @@ DJANGO_SYSTEM_APPS = [
 CUSTOM_USER_APPS = [
     "common",
     "payments",
-    "instructors",
     "reservations",
     "pilatesclass",
-    "members",
+    "users",
 ]
 
 THIRD_PARTY_APPS = [
@@ -130,10 +129,12 @@ REST_FRAMEWORK = {
 
 # api 문서 설정
 SPECTACULAR_SETTINGS = {
-    "TITLE": "DogGo API Documentation",
-    "DESCRIPTION": "This is a description of DogGo API",
+    "TITLE": "Pilates API Documentation",
+    "DESCRIPTION": "This is a description of Pilates API",
 }
 
+
+AUTH_USER_MODEL = "users.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

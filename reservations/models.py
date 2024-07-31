@@ -1,18 +1,18 @@
+# reservations/models.py
 from django.db import models
 
-from members.models import Member
 from pilatesclass.models import PilatesClass
+from users.models import User
 
 
-# 회원 수업 예약
 class Reservation(models.Model):
-    STATUS_CHOICES = [
-        ("Reserved", "Reserved"),
-        ("Cancelled", "Cancelled"),
-    ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reservations")
+    class_info = models.ForeignKey(PilatesClass, on_delete=models.CASCADE, related_name="reservations")
+    reserved_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, default="reserved")
 
-    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="reservations")
-    class_name = models.ForeignKey(PilatesClass, on_delete=models.CASCADE, related_name="reservations")
-    reservation_date = models.DateField()
-    reservation_time = models.CharField(max_length=100)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Reserved")
+    def __str__(self) -> str:
+        return f"{self.user.user_id} - {self.class_info.name}"
+
+    class Meta:
+        db_table = "reservation"
